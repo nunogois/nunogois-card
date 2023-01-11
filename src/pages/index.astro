@@ -2,21 +2,40 @@
 import TiltCard from '@/components/TiltCard.astro'
 import Layout from '../layouts/Layout.astro'
 import { Icon } from 'astro-icon'
+
+const DATE_BIRTHDAY = '1989-12-27'
+const DATE_PROFESSIONAL = '2011-03-01'
+
+const years = (date: string) => {
+  const _date = new Date(date)
+  const today = new Date()
+
+  let years = new Date().getFullYear() - _date.getFullYear()
+
+  if (
+    today.getMonth() < _date.getMonth() ||
+    (today.getMonth() == _date.getMonth() && today.getDate() < _date.getDate())
+  ) {
+    years--
+  }
+
+  return years
+}
 ---
 
 <Layout title='Nuno Góis - Full-Stack Developer'>
   <TiltCard>
     <div class='bg-bg p-4 rounded-md z-10'>
-      <div class='max-w-xs md:flex md:max-w-md'>
+      <div class='max-w-xs'>
         <img
-          src='/avatar.jpg'
+          src='/avatar.webp'
           alt='avatar'
-          class='w-full h-auto mx-auto rounded-md object-cover md:w-24 md:h-24'
+          class='w-full h-auto rounded-md object-cover'
         />
-        <div class='flex flex-col mt-2 md:ml-4 md:mt-0'>
+        <div class='flex flex-col mt-2'>
           <div class='flex flex-col sm:flex-row items-center justify-between'>
-            <h1 class='text-lg sm:text-xl md:text-2xl'>Nuno Góis</h1>
-            <div class='flex gap-1 my-2 md:my-0'>
+            <h1 class='text-2xl'>Nuno Góis</h1>
+            <div class='flex gap-1 my-2'>
               <a href='https://github.com/nunogois' target='_blank'
                 ><Icon name='mdi:github' class='w-6 h-6' /></a
               >
@@ -26,6 +45,11 @@ import { Icon } from 'astro-icon'
               <a href='https://www.linkedin.com/in/nuno-gois' target='_blank'
                 ><Icon name='mdi:linkedin' class='text-icon-ln w-6 h-6' /></a
               >
+              <a
+                href='https://www.nunogois.com/cv'
+                target='_blank'
+                class='font-bold'>CV</a
+              >
               <a href='mailto:me@nunogois.com' target='_blank'
                 ><Icon name='mdi:email' class='text-icon-mail w-6 h-6' /></a
               >
@@ -34,11 +58,13 @@ import { Icon } from 'astro-icon'
               >
             </div>
           </div>
-          <h2 class='text mt-1'>Full-Stack Developer</h2>
-          <p class='text-xs mt-1'>
-            Driven 33 years old from Portugal with over 11 years of professional
-            experience. Passionate for the job, love putting skills to the test,
-            facing challenges in a creative and perfectionist way.
+          <h2 class='text-lg mt-1'>Full-Stack Developer</h2>
+          <p class='text-sm mt-1'>
+            Driven {years(DATE_BIRTHDAY)} year old from Portugal with over {
+              years(DATE_PROFESSIONAL)
+            } years of professional experience. Passionate for the job, love putting
+            skills to the test, facing challenges in a creative and perfectionist
+            way.
           </p>
         </div>
       </div>
