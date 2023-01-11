@@ -5,7 +5,15 @@ export interface Props {
   title: string
 }
 
-const { title } = Astro.props
+const website = {
+  title: 'Nuno Góis - Full-Stack Developer',
+  description:
+    'Full-Stack Developer from Portugal. Experienced with every step of developing and delivering software projects using TypeScript, .NET C#, Go, Python, Rust, and more.',
+  url: 'https://card.nunogois.com',
+  twitter: '@nunogois_dev'
+}
+
+const { title } = Astro.props || website.title
 ---
 
 <!DOCTYPE html>
@@ -13,9 +21,46 @@ const { title } = Astro.props
   <head>
     <meta charset='UTF-8' />
     <meta name='viewport' content='width=device-width' />
-    <link rel='icon' type='image/svg+xml' href='/favicon.svg' />
+    <link rel='icon' type='image/svg+xml' href='/favicon.png' />
     <meta name='generator' content={Astro.generator} />
     <title>{title}</title>
+    <meta name='description' content={website.description} />
+    <meta
+      name='robots'
+      content='index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1'
+    />
+    <meta
+      property='og:type'
+      prefix='http://ogp.me/ns# website: http://ogp.me/ns/website#'
+      content='website'
+    />
+    <meta
+      property='og:title'
+      prefix='og: http://ogp.me/ns#'
+      content={website.title}
+    />
+    <meta
+      property='og:description'
+      prefix='og: http://ogp.me/ns#'
+      content={website.description}
+    />
+    <meta
+      property='og:image'
+      prefix='og: http://ogp.me/ns#'
+      content={website.url + '/thumbnail.png'}
+    />
+    <meta
+      property='og:url'
+      prefix='og: http://ogp.me/ns#'
+      content={website.url}
+    />
+    <meta name='twitter:card' content='summary_large_image' />
+    <meta name='twitter:title' content={website.title} />
+    <meta name='twitter:description' content={website.description} />
+    <meta name='twitter:image' content={website.url + '/thumbnail.png'} />
+    <meta name='twitter:url' content={website.url} />
+    <meta name='twitter:site' content={website.twitter} />
+    <meta name='twitter:creator' content={website.twitter} />
   </head>
   <body>
     <Starfield />
